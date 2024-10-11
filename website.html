@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Client</title>
+    <link href="https://fonts-online.ru/fonts/minecraft-rus" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'MyCustomFont';
+            src: url('fonts/minecraft.ttf') format('truetype');
+        }
+
+        body {
+            background-image: url('https://img2.akspic.ru/crops/3/3/0/9/7/179033/179033-graficeskij_dizajn-grafika-dizajn-vektornaya_grafika-krasnyj_cvet-3840x2160.jpg'); 
+            background-size: cover;
+            font-family: 'MyCustomFont', cursive;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            transition: background-color 0.3s ease, background-image 0.3s ease;
+        }
+
+        .section {
+            background-color: rgba(255, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            margin: 20px;
+            padding: 30px;
+            width: 300px;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .download {
+            color: #FFFFFF;
+            font-size: 28px;
+            text-decoration: none;
+            padding: 25px 40px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+
+        .download:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .toggle-theme {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 20px; 
+            background-color: rgba(223, 133, 133, 0.8);
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            background-image: url('https://cdn.icon-icons.com/icons2/3922/PNG/512/theme_device_icon_250032.png'); 
+            background-size: cover;
+            width: 70px; 
+            height: 70px; 
+        }
+
+        .toggle-theme:hover {
+            background-color: rgba(255, 100, 100, 0.8);
+        }
+
+        .theme-selector {
+            display: none;
+            position: absolute;
+            top: 90px;
+            right: 20px;
+            background-color: rgba(206, 10, 10, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* добавлено для свечения */
+            flex-direction: column;
+            padding: 10px;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .theme-option {
+            padding: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s;
+            border-radius: 10px;
+        }
+
+        .theme-option:hover {
+            background-color: rgba(165, 30, 154, 0.5);
+        }
+
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            flex-direction: column;
+            margin-top: 20px; 
+            text-align: center;
+            position: absolute; 
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+        }
+
+        .footer-icons {
+            display: flex;
+            margin-bottom: 10px; 
+            position: absolute; 
+            left: 20px;
+            bottom: 60px; /* Изменено на 60px, чтобы было место для текста */
+        }
+
+        .footer-icons img {
+            width: 50px; 
+            height: 50px; 
+            margin: 0 10px; 
+        }
+
+        .footer-text {
+            font-size: 20px; 
+        }
+
+        .section1, .section2, .section3, .section4 {
+            margin-top: 20px;
+        }
+
+        .color-picker {
+            margin: 20px;
+            padding: 10px;
+            text-align: center;
+            position: absolute;
+            bottom: 20px; /* Позиция изменена на 'bottom' */
+            right: 20px; /* Позиция изменена на 'right' */
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .youtubetext {
+            margin-bottom: 10px;
+            font-size: 20px;
+            text-align: center;
+            position: absolute; 
+            left: 50%; 
+            transform: translateX(-50%);
+            bottom: 5px; /* Позиция изменена, чтобы текст находился над иконками */
+        }
+    </style>
+</head>
+<body>
+
+    <button class="toggle-theme" onclick="toggleTheme()"></button>
+
+    <div class="theme-selector" id="themeSelector">
+        <div class="theme-option" onclick="setTheme('red')">Красная тема</div>
+        <div class="theme-option" onclick="setTheme('pink_blue')">Розово-Синяя тема</div>
+        <div class="theme-option" onclick="setTheme('clients')">Клиентская тема</div>
+        <div class="theme-option" onclick="setTheme('red_pink')">Красно-Розовая тема</div>
+        <div class="theme-option" onclick="setTheme('liro')">Розовая тема</div>
+    </div>
+
+    <div class="youtubetext">Обзор нашего клиента https://www.youtube.com/VisualClient</div>
+
+    <div class="footer-icons">
+        <img src="https://cdn.icon-icons.com/icons2/2429/PNG/512/telegram_logo_icon_147228.png" alt="Icon 1" id="footer-icon1">
+        <img src="https://cdn.icon-icons.com/icons2/1753/PNG/512/iconfinder-social-media-applications-32vk-4102593_113806.png" alt="Icon 2" id="footer-icon2">
+        <img src="https://cdn.icon-icons.com/icons2/3053/PNG/512/discord_macos_bigsur_icon_190238.png" alt="Icon 3" id="footer-icon3">
+    </div>
+
+    <div class="section section1">
+        <a href="path/to/your/VisualClient.zip" class="download" download>Visual Client</a>
+    </div>
+    <div class="section section2">
+        <a href="path/to/your/file1.zip" class="download" download>Visual HitBoxes</a>
+    </div>
+    <div class="section section3">
+        <a href="path/to/your/file2.zip" class="download" download>Visual Pro</a>
+    </div>
+    <div class="section section4">
+        <a href="path/to/your/file3.zip" class="download" download>Visual Free</a>
+    </div>
+
+    <div class="color-picker" id="colorPicker">
+        <label for="color">Выберите цвет для кнопок:</label>
+        <input type="color" id="color" onchange="changeButtonColors(event)" />
+    </div>
+
+    <div class="footer">
+        <div class="footer-text">
+            <p id="footer-text-1">О нас</p>
+            <p id="footer-text-2">Лицензия Mojang не подлежит.</p>
+        </div>
+    </div>
+
+    <script>
+        let darkTheme = false;
+        const themeSelector = document.getElementById('themeSelector');
+        const colorPicker = document.getElementById('colorPicker');
+
+        function toggleTheme() {
+            themeSelector.style.display = (themeSelector.style.display === 'none' || themeSelector.style.display === '') ? 'flex' : 'none';
+        }
+
+        function setTheme(theme) {
+    let backgroundImage;
+    let sectionBackgroundColor;
+    let themeSelectorBackgroundColor;
+    let themeSelectorBoxShadow;
+
+    switch (theme) {
+        case 'pink_blue':
+            backgroundImage = "url('https://img3.akspic.ru/crops/5/4/7/2/5/152745/152745-dizajn-graficeskij_dizajn-sinij-krasochnost-purpur-3840x2160.jpg')";
+            sectionBackgroundColor = "rgba(255, 105, 180, 0.8)";
+            themeSelectorBackgroundColor = "rgba(255, 105, 180, 0.5)";
+            themeSelectorBoxShadow = "0 0 15px rgba(255, 105, 180, 0.7)";
+            break;
+        case 'red_pink':
+            backgroundImage = "url('https://img1.akspic.ru/previews/2/9/3/7/6/167392/167392-geometriya-purpur-apelsin-rozovyj-fioletovyj-x750.jpg')";
+            sectionBackgroundColor = "rgba(255, 0, 0, 0.8)";
+            themeSelectorBackgroundColor = "rgba(255, 0, 0, 0.5)";
+            themeSelectorBoxShadow = "0 0 15px rgba(255, 0, 0, 0.7)";
+            break;
+        case 'red':
+            backgroundImage = "url('https://img2.akspic.ru/crops/3/3/0/9/7/179033/179033-graficeskij_dizajn-grafika-dizajn-vektornaya_grafika-krasnyj_cvet-3840x2160.jpg')";
+            sectionBackgroundColor = "rgba(255, 28, 28, 0.8)";
+            themeSelectorBackgroundColor = "rgba(255, 28, 28, 0.5)";
+            themeSelectorBoxShadow = "0 0 15px rgba(255, 28, 28, 0.7)";
+            break;
+        case 'clients':
+            backgroundImage = "url('https://img1.akspic.ru/crops/1/9/9/9/0/109991/109991-krasnyj_cvet-kub-geometriya-purpurnyj_cvet-treugolnik-3840x2160.jpg')";
+            sectionBackgroundColor = "rgba(214, 33, 87)";
+            themeSelectorBackgroundColor = "rgba(214, 33, 87, 0.5)";
+            themeSelectorBoxShadow = "0 0 15px rgba(214, 33, 87, 0.7)";
+            break;
+        case 'purple':
+            backgroundImage = "url('https://img2.akspic.ru/crops/3/3/0/9/7/179033/179033-graficeskij_dizajn-grafika-dizajn-vektornaya_grafika-krasnyj_cvet-3840x2160.jpg')";
+            sectionBackgroundColor = "rgba(255, 192, 203, 0.8)";
+            themeSelectorBackgroundColor = "rgba(255, 192, 203, 0.5)";
+            themeSelectorBoxShadow = "0 0 15px rgba(255, 192, 203, 0.7)";
+            break;
+        case 'liro':
+            backgroundImage = "url('https://img1.akspic.ru/previews/8/8/0/7/4/147088/147088-abstraktnoe_iskusstvo-purpurnyj_cvet-rastenie-purpur-abstrakciya-x750.jpg')";
+            sectionBackgroundColor = "rgba(242, 0, 178, 0.8)";
+            themeSelectorBackgroundColor = "rgba(242, 0, 178, 0.5)";
+            themeSelectorBoxShadow = "0 0 15px rgba(242, 0, 178, 0.7)";
+            break;
+    }
+
+    document.body.style.backgroundImage = backgroundImage;
+    document.querySelectorAll('.section').forEach(section => {
+        section.style.backgroundColor = sectionBackgroundColor;
+    });
+    themeSelector.style.backgroundColor = themeSelectorBackgroundColor;
+    themeSelector.style.boxShadow = themeSelectorBoxShadow;
+    document.getElementById('footer-text-1').textContent = theme.charAt(0).toUpperCase() + theme.slice(1) + " тема"; // Обновить текст фута
+
+    themeSelector.style.display = 'none'; // скрыть выбор тем после выбора
+}
+
+
+        function changeButtonColors(event) {
+            const color = event.target.value;
+            document.querySelectorAll('.download').forEach(button => {
+                button.style.backgroundColor = color;
+            });
+        }
+    </script>
+
+</body>
+</html>
